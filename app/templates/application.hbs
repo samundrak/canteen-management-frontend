@@ -1,5 +1,21 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        {{#link-to 'index' class="navbar-brand"}}
+          CanteenMS
+        {{/link-to}}
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Foods</a></li>
+          <li><a href="#">My orders</a></li>
+          <li><a href="#">History</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="jumbotron">
+    {{outlet}}
+  </div>
+</div>

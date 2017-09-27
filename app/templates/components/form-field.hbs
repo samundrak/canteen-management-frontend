@@ -1,0 +1,11 @@
+<div class="form-group">
+  <label for="email">{{ label }}:</label>
+  {{yield}}
+  {{#if errors}}
+    {{#each errors as |error|}}
+      <div class="alert alert-danger">
+        {{ error }}
+      </div>
+    {{/each}}
+  {{/if}}
+</div>
