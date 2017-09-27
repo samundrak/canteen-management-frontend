@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  beforeModel() {
-    console.log(1);
-  }
+  auth: Ember.inject.service(),
+  user: Ember.computed('auth', function () {
+    return this.get('auth').getUser();
+  }),
 });

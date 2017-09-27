@@ -3,7 +3,7 @@ import Storage from '../src/storage/Storage';
 
 export default Ember.Service.extend({
   init() {
-    const storage = new Storage();
+    const storage = Storage.getInstance();
     if (Storage.isLocalAvialable()) {
       storage.setService(Storage.LOCAL);
     } else {

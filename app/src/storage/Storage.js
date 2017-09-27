@@ -23,7 +23,7 @@ class Storage {
   }
 
   get(key) {
-    this.service.get(key);
+    return this.service.get(key);
   }
 
   set(key, value) {
@@ -41,5 +41,14 @@ class Storage {
 
 Storage.MEMORY = 'memory';
 Storage.LOCAL = 'local';
+
+Storage.INSTANCE = null;
+Storage.getInstance = function getInstance() {
+  if (!Storage.INSTANCE) {
+    Storage.INSTANCE = new Storage();
+  }
+
+  return Storage.INSTANCE;
+};
 
 export default Storage;
