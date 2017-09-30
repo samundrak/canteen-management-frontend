@@ -4,10 +4,16 @@ import * as API from '../src/api/index';
 export default Ember.Service.extend({
   httpClient: Ember.inject.service('http-client'),
   init() {
+    this.createBasicApi();
+    this.createAuthApi();
+  },
+  createBasicApi() {
     if (!this.get('httpClientAPI')) {
       this.set('httpClientAPI', this.get('httpClient').api());
     }
-    if (!this.get('httpClientAuth')) {
+  },
+  createAuthApi(reload = false) {
+    if (reload || !this.get('httpClientAuth')) {
       this.set('httpClientAuth', this.get('httpClient').auth());
     }
   },
@@ -19,5 +25,8 @@ export default Ember.Service.extend({
   },
   profile() {
     return this.get('httpClientAuth').get(API.ME);
+  },
+  updateProfile(userId, payload) {
+    return this.get('httpClientAuth').put(`${API.USERS}/${userId}`, payload);
   }
 });

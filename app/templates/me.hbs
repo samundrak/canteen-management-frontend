@@ -1,0 +1,16 @@
+<div class="container">
+  {{#form-layout isSubmitting=isSubmitting}}
+    <form {{ action "handleUpdate" on="submit"}}>
+      {{#form-field label="Email Address" errors=model.errors.email}}
+        {{input disabled="true" value=model.user.email class='form-control'}}
+      {{/form-field}}
+      {{#form-field label="First Name" errors=model.errors.first_name}}
+        {{input value=model.user.first_name class='form-control'}}
+      {{/form-field}}
+      {{#form-field label="Last Name" errors=model.errors.last_name}}
+        {{input value=model.user.last_name class='form-control'}}
+      {{/form-field}}
+      <button type="submit" class="btn btn-default">Update</button>
+    </form>
+  {{/form-layout}}
+</div>

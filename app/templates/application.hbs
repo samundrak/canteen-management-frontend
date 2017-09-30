@@ -6,16 +6,34 @@
           CanteenMS
         {{/link-to}}
       </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Foods</a></li>
-          <li><a href="#">My orders</a></li>
-          <li><a href="#">History</a></li>
-        </ul>
-      </div>
+      {{#if session._id}}
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              {{#link-to 'foods'}} Foods {{/link-to}}
+            </li>
+            <li>
+              {{#link-to 'orders'}} Orders {{/link-to}}
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true"
+                 aria-expanded="false">
+                My Account ({{session.first_name}} {{session.last_name}})
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li>
+                  {{#link-to 'me'}} Edit {{/link-to}}
+                </li>
+                <li><a href="#" {{ action "handleLogout" on="click"}}>Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      {{/if}}
     </div>
   </nav>
-  user: {{ user }}
   <div class="jumbotron">
     {{outlet}}
   </div>

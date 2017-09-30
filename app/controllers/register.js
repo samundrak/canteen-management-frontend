@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const LOGIN_RULES = {
+const REGISTER_RULES = {
   first_name: 'required',
   last_name: 'required',
   email: 'required|email',
@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
   validator: Ember.inject.service(),
   isSubmitting: false,
   validate(credentials) {
-    const validate = this.get('validator').validate(credentials, LOGIN_RULES);
+    const validate = this.get('validator').validate(credentials, REGISTER_RULES);
     this.set('model.errors', validate.errors);
     return validate.status;
   },

@@ -12,6 +12,10 @@ Router.map(function() {
   });
   this.route('login');
   this.route('register');
+  this.route('foods');
+  this.route('orders');
+  this.route('users');
+  this.route('me');
 });
 
 export default Router;

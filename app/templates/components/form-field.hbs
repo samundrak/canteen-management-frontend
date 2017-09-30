@@ -3,7 +3,7 @@
   {{yield}}
   {{#if errors}}
     {{#each errors as |error|}}
-      <div class="alert alert-danger">
+      <div class="message message-danger" style="color:red">
         {{ error }}
       </div>
     {{/each}}

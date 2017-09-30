@@ -1,3 +1,4 @@
+/* global Promise */
 import Ember from 'ember';
 
 export default Ember.Service.extend({
@@ -26,6 +27,7 @@ export default Ember.Service.extend({
     return this.get('api').profile();
   },
   logout() {
-
+    this.get('storage').remove('token');
+    return Promise.resolve();
   },
 });

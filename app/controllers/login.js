@@ -7,6 +7,7 @@ const LOGIN_RULES = {
 
 export default Ember.Controller.extend({
   auth: Ember.inject.service(),
+  api: Ember.inject.service(),
   validator: Ember.inject.service(),
   isSubmitting: false,
   validate(credentials) {
@@ -29,7 +30,7 @@ export default Ember.Controller.extend({
         .then(({ data }) => {
           auth.setToken(data.token);
           alertify.notify('You have been logged in.');
-          setTimeout(() => this.replaceWith('index'), 2000);
+          setTimeout(() => (window.location.href = '/'), 2000);
           this.toggleProperty('isSubmitting');
         })
         .catch((err) => {
