@@ -24,7 +24,7 @@ export default Ember.Service.extend({
     return this.get('httpClientAPI').post(API.REGISTER, credentials);
   },
   profile() {
-    return this.get('httpClientAuth').get(API.ME);
+    return this.get('httpClientAuth').get(API.PROFILE);
   },
   updateProfile(userId, payload) {
     return this.get('httpClientAuth').put(`${API.USERS}/${userId}`, payload);

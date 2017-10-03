@@ -1,3 +1,4 @@
+/* global Promise */
 import Ember from 'ember';
 import RSVP from 'rsvp';
 
@@ -8,7 +9,7 @@ export default Ember.Route.extend({
       session: this.get('auth').ping()
         .then(({ data }) => data)
         .catch(() => {
-          return this.replaceWith('login');
+          return Promise.resolve(null);
         }),
     });
   },
@@ -18,27 +19,21 @@ export default Ember.Route.extend({
       return this.replaceWith('login');
     }
   },
-  setupController: function (controller) {
+  afterModel({ session }) {
     const auth = this.get('auth');
-    auth.ping()
-      .then(({ data }) => {
-        auth.setUser(data);
-        Object.defineProperty(window, 'token', {
-          enumerable: false,
-          configurable: false,
-          value: auth.getToken(),
-        });
-        controller.set("session", data);
-        return this.replaceWith('index');
-      })
-      .catch(() => {
-        Object.defineProperty(window, 'token', {
-          enumerable: false,
-          configurable: false,
-          value: null,
-        });
-        controller.set("session", null);
-        return this.replaceWith('login');
+    Object.defineProperty(window, 'token', {
+      enumerable: false,
+      configurable: false,
+      value: auth.getToken(),
+    });
+    if (session && !session._id) {
+      Object.defineProperty(window, 'token', {
+        enumerable: false,
+        configurable: false,
+        value: null,
       });
+      return this.replaceWith('login');
+    }
+    auth.setUser(session);
   },
 });

@@ -1,1 +1,7 @@
-{{outlet}}
+<ul class="list-group">
+  {{#each model as |food|}}
+    <li class="list-group-item">
+      {{#food-item food=food handleFoodOrder="handleFoodOrder"}}{{/food-item}}
+    </li>
+  {{/each}}
+</ul>
