@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-md-8">
-    <ul>
-      <li>
-        Food: {{food.name}}
+    <ul class="list-group">
+      <li class="list-group-item">
+        <b> Food</b>: {{food.name}}
       </li>
-      <li>
-        Price: {{food.price}}
+      <li class="list-group-item">
+        <b>Price:</b> ${{food.price}}
       </li>
-      <li>
-        Description: {{food.description}}
+      <li class="list-group-item">
+        <b>Description:</b> {{food.description}}
       </li>
     </ul>
   </div>
@@ -20,6 +20,7 @@
           Order this food
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
+          <li class="active list-group-item">Select Shift</li>
           <li>
             <a href="javascript:void(0)" {{ action "handleFoodOrder" "morning" food on="click"}}>Morning</a>
           </li>

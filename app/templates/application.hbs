@@ -6,7 +6,7 @@
           CanteenMS
         {{/link-to}}
       </div>
-      {{#if model.session._id}}
+      {{#if model.session.email}}
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li>
@@ -15,6 +15,11 @@
             <li>
               {{#link-to 'orders'}} Orders {{/link-to}}
             </li>
+            {{#if model.isAdministrator}}
+              <li>
+                {{#link-to 'users'}} Users {{/link-to}}
+              </li>
+            {{/if}}
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">

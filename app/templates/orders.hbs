@@ -1,1 +1,21 @@
-{{outlet}}
+<ul class="list-group">
+  <li class="list-group-item active">
+    <h4>
+      {{#if model.isAdministrator}}
+        Orders
+      {{else}}
+        Your Orders
+      {{/if}}
+        ({{model.orders.length}})
+    </h4>
+  </li>
+  {{#each model.orders as |order|}}
+    <li class="list-group-item">
+      {{#order-item
+        handleStatusChange="handleStatusChange"
+        handleCancelOrder="handleCancelOrder"
+        hasAccess=model.isAdministrator
+        order=order}}{{/order-item}}
+    </li>
+  {{/each}}
+</ul>

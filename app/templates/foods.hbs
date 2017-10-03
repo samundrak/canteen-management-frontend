@@ -1,7 +1,18 @@
 <ul class="list-group">
-  {{#each model as |food|}}
-    <li class="list-group-item">
-      {{#food-item food=food handleFoodOrder="handleFoodOrder"}}{{/food-item}}
-    </li>
-  {{/each}}
+  <li class="list-group-item active">
+    <h4>
+      Available Foods ({{model.foods.length}})
+      {{#if model.isAdministrator}}
+        {{#link-to 'add-food'}}
+          <button class="btn btn-info pull-right">Add Food</button>
+        {{/link-to}}
+      {{/if}}
+    </h4>
+  </li>  {{#each model.foods as |food|}}
+  <li class="list-group-item">
+    {{#food-item
+      food=food
+      handleFoodOrder="handleFoodOrder"}}{{/food-item}}
+  </li>
+{{/each}}
 </ul>

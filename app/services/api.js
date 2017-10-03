@@ -27,6 +27,21 @@ export default Ember.Service.extend({
     return this.get('httpClientAuth').get(API.PROFILE);
   },
   updateProfile(userId, payload) {
-    return this.get('httpClientAuth').put(`${API.USERS}/${userId}`, payload);
-  }
+    return this.get('httpClientAuth').patch(`${API.USERS}/${userId}`, payload);
+  },
+  makeOrder(payload) {
+    return this.get('httpClientAuth').post(API.ORDERS, payload);
+  },
+  orders() {
+    return this.get('httpClientAuth').get(API.ORDERS);
+  },
+  cancelOrder(orderId) {
+    return this.get('httpClientAuth').delete(`${API.ORDERS}/${orderId}`);
+  },
+  updateOrder(orderId, payload) {
+    return this.get('httpClientAuth').patch(`${API.ORDERS}/${orderId}`, payload);
+  },
+  addFood(food) {
+    return this.get('httpClientAuth').post(API.FOODS, food);
+  },
 });

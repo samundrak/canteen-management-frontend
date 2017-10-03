@@ -16,6 +16,7 @@ Router.map(function() {
   this.route('orders');
   this.route('users');
   this.route('me');
+  this.route('add-food');
 });
 
 export default Router;

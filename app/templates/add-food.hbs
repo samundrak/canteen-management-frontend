@@ -1,0 +1,16 @@
+<div class="container">
+  {{#form-layout isSubmitting=isSubmitting}}
+    <form {{ action "handleAddFood" on="submit"}}>
+      {{#form-field label="Name" errors=model.errors.name}}
+        {{input value=model.food.name class='form-control'}}
+      {{/form-field}}
+      {{#form-field label="Price" errors=model.errors.price}}
+        {{input value=model.food.price class='form-control'}}
+      {{/form-field}}
+      {{#form-field label="Description" errors=model.errors.description}}
+        {{textarea value=model.food.description class='form-control'}}
+      {{/form-field}}
+      <button type="submit" class="btn btn-default">Add Food</button>
+    </form>
+  {{/form-layout}}
+</div>
