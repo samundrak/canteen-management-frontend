@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
         .then(({ data }) => {
           auth.setToken(data.token);
           alertify.notify('You have been registered.');
-          setTimeout(() => this.replaceWith('index'), 2000);
+          setTimeout(() => this.transitionToRoute('login'), 2000);
           this.toggleProperty('isSubmitting');
         })
         .catch((err) => {

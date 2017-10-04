@@ -11,7 +11,6 @@ export default Ember.Route.extend({
         .then(({ data }) => data)
         .catch(() => Promise.resolve(null)),
       isAdministrator: Ember.computed('session', function () {
-        console.log(this.session.role);
         return this.session.role === 'admin' || this.session.role === 'owner';
       }),
     });

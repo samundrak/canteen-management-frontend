@@ -5,10 +5,16 @@ export default Ember.Route.extend({
     return {
       food: {
         name: null,
-        price: 0,
+        price: 10,
         description: null,
       },
       errors: {},
     };
   },
+  afterModel() {
+    const session = this.modelFor('application').session;
+    if (session.role === 'user') {
+      this.transitionTo('index');
+    }
+  }
 });

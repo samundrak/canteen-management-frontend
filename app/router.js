@@ -6,10 +6,11 @@ const Router = Ember.Router.extend({
   rootURL: config.rootURL
 });
 
-Router.map(function() {
-  this.route('app', function() {
+Router.map(function () {
+  this.route('app', function () {
     this.route('profile');
   });
+  this.route('user', { path: '/user/:user_id' });
   this.route('login');
   this.route('register');
   this.route('foods');

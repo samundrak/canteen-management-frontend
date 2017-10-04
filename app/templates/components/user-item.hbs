@@ -2,13 +2,16 @@
   <div class="col-md-8">
     <ul class="list-group">
       <li class="list-group-item">
-        <b> Food</b>: {{food.name}}
+        <b>Full Name</b>:
+        {{#link-to 'user' user.id}}
+          {{user.first_name}} {{user.last_name}}
+        {{/link-to}}
       </li>
       <li class="list-group-item">
-        <b>Price:</b> {{food.price}}
+        <b>Role:</b> {{user.role}}
       </li>
       <li class="list-group-item">
-        <b>Description:</b> {{food.description}}
+        <b>Joined on:</b> {{user.created_at}}
       </li>
     </ul>
   </div>
@@ -17,18 +20,14 @@
       <li class="dropdown">
         <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true"
            aria-expanded="false">
-          Order this food
+          Actions
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li class="active list-group-item">Select Shift</li>
           <li>
-            <a href="javascript:void(0)" {{ action "handleFoodOrder" "morning" food on="click"}}>Morning</a>
+            <a href="javascript:void(0)" {{ action "handleRoleChange" "admin" user on="click"}}>Make Admin</a>
           </li>
           <li>
-            <a href="javascript:void(0)" {{ action "handleFoodOrder" "day" food on="click"}}>Day</a>
-          </li>
-          <li>
-            <a href="javascript:void(0)" {{ action "handleFoodOrder" "night" food on="click"}}>Night</a>
+            <a href="javascript:void(0)" {{ action "handleRoleChange" "user" user on="click"}}>Make User</a>
           </li>
         </ul>
       </li>

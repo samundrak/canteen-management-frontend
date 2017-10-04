@@ -8,7 +8,4 @@ export default DS.Model.extend({
   email: DS.attr('string'),
   created_at: DS.attr('date'),
   role: DS.attr('string'),
-  fullName: Ember.computed('first_name', 'last_name', function () {
-    return `${this.get('first_name')} ${this.get('last_name')}`;
-  }),
 });
