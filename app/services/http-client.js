@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import axios from 'npm:axios';
+import config from 'canteen-ms-frontend/config/environment';
 
 const validateStatus = function validateStatus(status) {
   return status >= 200 && status <= 299; // default
 };
 
 export default Ember.Service.extend({
-  host: 'http://localhost:3000',
+  host: config.APP.apiHost,
   authenticate: Ember.inject.service('auth'),
   auth: function api() {
     return axios.create({
