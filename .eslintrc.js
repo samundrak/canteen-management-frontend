@@ -13,5 +13,6 @@ module.exports = {
   },
   globals: {
     alertify: true,
+    loginToApp: true,
   },
 };
