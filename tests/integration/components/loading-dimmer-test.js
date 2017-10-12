@@ -5,20 +5,17 @@ moduleForComponent('loading-dimmer', 'Integration | Component | loading dimmer',
   integration: true
 });
 
-test('it renders', function(assert) {
+test('it renders', function (assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{loading-dimmer}}`);
+  this.set('status', true);
+  this.render(hbs`{{loading-dimmer status=status}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$('.loader').length, true);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#loading-dimmer}}
-      template block text
-    {{/loading-dimmer}}
-  `);
+  this.set('status', false);
+  this.render(hbs`{{loading-dimmer status=status}}`);
+  assert.equal(this.$('.loader').length, false);
 
-  assert.equal(this.$().text().trim(), 'template block text');
 });

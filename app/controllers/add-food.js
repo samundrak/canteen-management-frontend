@@ -19,7 +19,8 @@ export default Ember.Controller.extend({
       if (!this.validate(food)) {
         return false;
       }
-      return this.get('api')
+      return this
+        .get('api')
         .addFood(food)
         .then(() => {
           alertify.notify('Food Item has been added.');
