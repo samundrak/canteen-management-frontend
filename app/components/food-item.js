@@ -1,9 +1,12 @@
-import Ember from 'ember';
-
-export default Ember.Component.extend({
-  actions: {
-    handleFoodOrder(shift, food) {
-      this.sendAction('handleFoodOrder', shift, food);
-    },
-  },
-});
+// @flow
+import React from 'react';
+import { mount } from 'enzyme';
+import renderer from 'react-test-renderer';
+import moment from 'moment-timezone';
+import * as Ranges from 'pages/Event/Dashboard/duck/constant';
+import DatePicker from 'react-aaui/lib/DatePicker';
+import RevenueFilter from './RevenueFilter';
+const handleDateRangeSelection = jest.fn();
+const timeZoneId = 'US/Eastern';
+const props = { timeZoneId, selectedRangeId: Ranges.ALL_TIME, handleApply: handleDateRangeSelection, };
+describe('Render', () => { it('should render as expect', () => { const wrapper = renderer.create(<RevenueFilter {...props} />).toJSON(); expect(wrapper).toMatchSnapshot(); }); }); describe('Interact', () => { afterEach(() => { handleDateRangeSelection.mockReset(); }); it('should call handler when directly clicked apply', () => { const wrapper = mount(<RevenueFilter {...props} />); wrapper.find('.dropdown__menu li').at(0).simulate('click'); wrapper.find('.save-btn').at(1).simulate('click'); expect(handleDateRangeSelection).toBeCalledWith({ startDate: '', endDate: '' }); }); it('should call handler when select `last 7 days` and clicked apply', () => { const wrapper = mount(<RevenueFilter {...props} />); wrapper.find('.dropdown__menu li').at(3).simulate('click'); wrapper.find('.save-btn').at(1).simulate('click'); expect(handleDateRangeSelection).toBeCalledWith({ startDate: moment.tz(timeZoneId).startOf('day').add(-6, 'd').format(), endDate: moment.tz(timeZoneId).endOf('day').format(), }); }); }); describe('Custom date range', () => { // let wrapper; // beforeEach(() => { // wrapper = mount(<RevenueFilter {...props} />); // }); it('Should render component', () => { const wrapper = mount(<RevenueFilter {...props} />); console.log(wrapper.instance().selectDateRange(Ranges.CUSTOM_DATE_RANGE)); }); }); // describe('Custom date range', () => { // describe('render', () => { // let wrapper; // beforeEach(() => { // wrapper = mount(<RevenueFilter {...props} />); // wrapper.instance().selectDateRange(Ranges.CUSTOM_DATE_RANGE); // }); // it('should render Datepicker components when "customDateRange" Dropdown option is selected', () => { // expect(wrapper.find(DatePicker)).toHaveLength(2); // }); // it('selecting customDateRange resets startDate, endDate fields and error message', () => { // expect(wrapper.instance().state.startDate).toEqual(''); // expect(wrapper.instance().state.endDate).toEqual(''); // expect(wrapper.instance().state.dateRangeErrorMessage).toEqual(''); // }); // it('selecting other dropdown options makes it submissible with startDate and endDate resetted', () => { // wrapper.instance().selectDateRange(Ranges.TODAY); // expect(wrapper.instance().state.startDate).toEqual(''); // expect(wrapper.instance().state.endDate).toEqual(''); // wrapper.find('.save-btn').simulate('click'); // expect(wrapper.find('.date-range-picker__error')).toHaveLength(0); // }); // }); // describe('Error conditions', () => { // let wrapper; // beforeEach(() => { // wrapper = mount(<RevenueFilter {...props} />); // wrapper.instance().selectDateRange(Ranges.CUSTOM_DATE_RANGE); // }); // it('shows error when any DatePicker field is left empty', () => { // expect(wrapper.find('.date-range-picker__error')).toHaveLength(0); // wrapper.instance().setStartDate('Wed Sep 18 2019 17:16:00 GMT+0545 (Nepal Time)'); // wrapper.find('.save-btn').simulate('click'); // expect(wrapper.find('.date-range-picker__error')).toHaveLength(1); // }); // it('shows error when startDate is more than or equal to endDate', () => { // wrapper.instance().setStartDate('Wed Sep 18 2019 17:16:00 GMT+0545 (Nepal Time)'); // wrapper.instance().setEndDate('Tue Sep 17 2019 17:16:00 GMT+0545 (Nepal Time)'); // expect(wrapper.find('.date-range-picker__error')).toHaveLength(1); // }); // }); // });
